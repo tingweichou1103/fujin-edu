@@ -3300,7 +3300,8 @@ main {
 .loc-box-head {
   display: flex;
   align-items: center;
-  gap: 16px;
+  flex-wrap: wrap;
+  gap: 14px 16px;
   margin-bottom: 22px;
   padding-bottom: 18px;
   border-bottom: 2px solid var(--pale);
@@ -3350,11 +3351,13 @@ main {
   color: var(--navy-deep);
   letter-spacing: 1.5px;
   margin: 0;
+  white-space: nowrap;
 }
 
 .loc-map-nav-btn {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 7px;
   padding: 8px 16px;
   background: var(--pale);
@@ -3366,6 +3369,21 @@ main {
   border-radius: 6px;
   transition: all .2s ease;
   margin-left: auto;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .location-info-box,
+  .location-map-box {
+    padding: 24px 20px;
+  }
+
+  .loc-map-nav-btn {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px 16px;
+  }
 }
 
 .loc-map-nav-btn:hover {
