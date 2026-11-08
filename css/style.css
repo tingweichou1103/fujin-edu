@@ -4532,25 +4532,34 @@ main {
   .menu-links {
     display: flex;
     flex-direction: column;
-    gap: 4px;
+    gap: 6px;
     margin: 0;
-    width: 90%;
+    width: 92%;
   }
 
   .site-head .menu .menu-links>a,
   .site-head .menu .menu-links .has-sub>a {
     font-family: 'EB Garamond', 'Noto Serif TC', serif;
-    font-size: 22px;
+    font-size: 21px;
     font-weight: 900;
     letter-spacing: 2px;
     color: #ffffff !important;
     text-decoration: none !important;
-    padding: 12px 0;
+    padding: 10px 0;
     background: transparent !important;
-    border: none;
-    display: block;
+    border: none !important;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     width: 100%;
     box-sizing: border-box;
+  }
+
+  /* 移除桌機版底線與子項目展開時的殘留線條 */
+  .site-head .menu a::after,
+  .site-head .menu .menu-links>a::after,
+  .site-head .menu .has-sub>a::after {
+    display: none !important;
   }
 
   .site-head .menu .menu-links>a:hover,
@@ -4559,10 +4568,10 @@ main {
   .site-head .menu .menu-links .has-sub>a.active {
     color: #ffcf5c !important;
     background: transparent !important;
-    transform: translateX(6px);
+    transform: translateX(4px);
   }
 
-  /* 子選單 */
+  /* 子選單：改為無框線、圓角膠囊雙欄網格設計 */
   .site-head .menu .has-sub {
     width: 100%;
   }
@@ -4575,43 +4584,62 @@ main {
     visibility: visible !important;
     box-shadow: none !important;
     border: none !important;
-    margin: 2px 0 6px !important;
-    padding: 0 0 0 12px !important;
-    border-left: 2px solid rgba(200, 139, 0, 0.4) !important;
+    margin: 4px 0 8px !important;
+    padding: 0 !important;
     background: transparent !important;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
     width: 100%;
   }
 
   .site-head .menu .submenu::before {
-    display: none;
+    display: none !important;
   }
 
   .site-head .menu .submenu a {
     font-family: 'EB Garamond', 'Noto Serif TC', serif;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
-    letter-spacing: 1.5px;
-    color: #dbe4f0 !important;
-    background: transparent !important;
-    padding: 10px 14px !important;
+    letter-spacing: 1px;
+    color: #e2e8f0 !important;
+    background: rgba(255, 255, 255, 0.07) !important;
+    padding: 12px 14px !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
-    display: block !important;
+    border-radius: 12px !important;
+    display: flex !important;
+    align-items: center;
+    gap: 8px;
     box-sizing: border-box;
     text-decoration: none !important;
     width: 100%;
-    transition: color 0.22s ease, background 0.22s ease, padding-left 0.22s ease;
+    transition: color 0.22s ease, background 0.22s ease, transform 0.22s ease;
+  }
+
+  .site-head .menu .submenu a::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(255, 207, 92, 0.55);
+    flex-shrink: 0;
+    transition: background 0.22s ease, transform 0.22s ease;
   }
 
   .site-head .menu .submenu a:hover,
   .site-head .menu .submenu a:active,
   .site-head .menu .submenu a.active {
-    background: rgba(200, 139, 0, 0.22) !important;
+    background: rgba(200, 139, 0, 0.28) !important;
     color: #ffcf5c !important;
-    padding-left: 20px !important;
+    padding-left: 14px !important;
+    transform: translateY(-2px);
+  }
+
+  .site-head .menu .submenu a:hover::before,
+  .site-head .menu .submenu a:active::before,
+  .site-head .menu .submenu a.active::before {
+    background: #ffcf5c;
+    transform: scale(1.3);
   }
 
 }
