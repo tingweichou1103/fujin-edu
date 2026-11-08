@@ -11,8 +11,11 @@
     
     <label for="navtog" class="nav-toggle" aria-label="開關選單">
       <span class="nav-btn-circle">
-        <i class="fa-solid fa-bars nav-icon-open"></i>
-        <i class="fa-solid fa-xmark nav-icon-close"></i>
+        <span class="hb-box">
+          <span class="hb-line hb-1"></span>
+          <span class="hb-line hb-2"></span>
+          <span class="hb-line hb-3"></span>
+        </span>
       </span>
     </label>
 

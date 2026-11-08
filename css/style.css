@@ -274,9 +274,9 @@ img {
 .ph-title {
   font-family: 'EB Garamond', 'Noto Serif TC', serif;
   font-weight: 900;
-  font-size: 36px;
-  line-height: 1.25;
-  letter-spacing: 3px;
+  font-size: 30px;
+  line-height: 1.3;
+  letter-spacing: 2.5px;
   color: #ffffff;
   text-shadow: 0 2px 12px rgba(5, 16, 45, .4);
 }
@@ -4024,8 +4024,9 @@ main {
   }
 
   .ph-title {
-    font-size: 36px;
-    letter-spacing: 2px;
+    font-size: 24px;
+    line-height: 1.35;
+    letter-spacing: 1.5px;
   }
 
   .ph-sub {
@@ -4250,7 +4251,7 @@ main {
     justify-content: space-between;
   }
 
-  /* 1. 圓形懸浮開關按鈕 (Suguro Circular Floating Trigger) */
+  /* 1. 圓形懸浮開關按鈕 (Dynamic Morphing Circular Trigger) */
   .nav-toggle {
     display: flex;
     align-items: center;
@@ -4263,50 +4264,106 @@ main {
   }
 
   .nav-btn-circle {
+    position: relative;
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #0f2b68, #051438);
-    border: 1px solid rgba(206, 162, 115, 0.5);
-    box-shadow: 0 8px 24px -4px rgba(16, 42, 107, 0.45);
+    background: linear-gradient(135deg, #132F54, #1A3E6E);
+    border: 1.5px solid rgba(200, 139, 0, 0.65);
+    box-shadow: 0 8px 24px -4px rgba(19, 47, 84, 0.5);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #e2b480;
-    font-size: 19px;
-    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: transform 0.55s cubic-bezier(0.34, 1.56, 0.64, 1),
+      background 0.35s ease,
+      border-color 0.35s ease,
+      box-shadow 0.35s ease;
+    animation: navBtnPulse 2.8s infinite ease-in-out;
+  }
+
+  @keyframes navBtnPulse {
+    0%, 100% {
+      box-shadow: 0 8px 22px -4px rgba(19, 47, 84, 0.5), 0 0 0 0 rgba(200, 139, 0, 0.35);
+    }
+    50% {
+      box-shadow: 0 10px 26px -4px rgba(19, 47, 84, 0.6), 0 0 0 6px rgba(200, 139, 0, 0);
+    }
+  }
+
+  .hb-box {
+    position: relative;
+    width: 20px;
+    height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .hb-line {
+    display: block;
+    height: 2px;
+    background: #ffcf5c;
+    border-radius: 2px;
+    transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1),
+      width 0.3s ease,
+      opacity 0.25s ease,
+      background-color 0.3s ease;
+    transform-origin: center;
+  }
+
+  .hb-1 {
+    width: 20px;
+  }
+
+  .hb-2 {
+    width: 13px;
+  }
+
+  .hb-3 {
+    width: 17px;
   }
 
   .nav-toggle:hover .nav-btn-circle {
-    transform: scale(1.06);
-    border-color: var(--gold-bright);
-    box-shadow: 0 10px 28px -4px rgba(206, 162, 115, 0.4);
+    transform: scale(1.08) rotate(-6deg);
+    border-color: #ffcf5c;
   }
 
-  .nav-icon-open {
-    display: block;
+  .nav-toggle:hover .hb-2,
+  .nav-toggle:hover .hb-3 {
+    width: 20px;
   }
 
-  .nav-icon-close {
-    display: none;
-  }
-
+  /* 點擊開啟選單時：圓鈕彈性旋轉 180 度＋三條線變形為 X */
   #navtog:checked~.head-inner .nav-toggle .nav-btn-circle {
     background: var(--gold-deep);
     border-color: #ffffff;
-    color: #ffffff;
-    box-shadow: 0 10px 30px -4px rgba(176, 124, 69, 0.6);
+    transform: rotate(180deg) scale(1.06);
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.14), 0 12px 30px -4px rgba(200, 139, 0, 0.7);
+    animation: none;
   }
 
-  #navtog:checked~.head-inner .nav-toggle .nav-icon-open {
-    display: none;
+  #navtog:checked~.head-inner .nav-toggle .hb-line {
+    background: #ffffff;
   }
 
-  #navtog:checked~.head-inner .nav-toggle .nav-icon-close {
-    display: block;
+  #navtog:checked~.head-inner .nav-toggle .hb-1 {
+    width: 20px;
+    transform: translateY(6px) rotate(45deg);
   }
 
-  /* 2. Suguro 滿版動態全螢幕選單 (Full-Screen Dynamic Overlay) */
+  #navtog:checked~.head-inner .nav-toggle .hb-2 {
+    width: 0;
+    opacity: 0;
+    transform: translateX(8px);
+  }
+
+  #navtog:checked~.head-inner .nav-toggle .hb-3 {
+    width: 20px;
+    transform: translateY(-6px) rotate(-45deg);
+  }
+
+  /* 2. Suguro 滿版動態全螢幕選單 (Full-Screen Dynamic Overlay + Staggered Reveal) */
   .site-head .menu {
     position: fixed;
     top: 0;
@@ -4314,7 +4371,8 @@ main {
     width: 100vw;
     height: 100vh;
     height: 100dvh;
-    background: linear-gradient(150deg, #051336 0%, #0d265e 65%, #040e2b 100%);
+    background: radial-gradient(circle at 88% 8%, rgba(200, 139, 0, 0.22) 0%, transparent 45%),
+      linear-gradient(150deg, #051336 0%, #0d265e 65%, #040e2b 100%);
     box-shadow: none;
     border: none;
     z-index: 1000;
@@ -4324,18 +4382,70 @@ main {
     box-sizing: border-box;
     overflow-y: auto;
 
-    /* 幕簾式滑動與淡入動態 (Curtain Slide Opening Dynamics) */
+    /* 幕簾展開與圓弧剪裁動態 */
     opacity: 0;
     visibility: hidden;
-    transform: translateY(-100%);
-    transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease, visibility 0.4s;
+    transform: translateY(-100%) scale(0.98);
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.38s ease, visibility 0.38s;
   }
 
   #navtog:checked~.head-inner .menu {
     display: flex;
     opacity: 1;
     visibility: visible;
+    transform: translateY(0) scale(1);
+  }
+
+  /* 選單內元素：開啟時依序由下往上彈性浮現 (Staggered Cascade) */
+  .menu-mobile-brand,
+  .menu-cta-btn,
+  .site-head .menu .menu-links>a,
+  .site-head .menu .menu-links>.has-sub {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.42s ease, transform 0.48s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.25s ease, background 0.25s ease;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-mobile-brand {
+    opacity: 1;
     transform: translateY(0);
+    transition-delay: 0.08s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-cta-btn {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.14s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-links> :nth-child(1) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.20s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-links> :nth-child(2) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.26s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-links> :nth-child(3) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.32s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-links> :nth-child(4) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.38s;
+  }
+
+  #navtog:checked~.head-inner .menu .menu-links> :nth-child(5) {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: 0.44s;
   }
 
   /* 選單頂部 Header — Logo + 預約試聽按鈕垂直排列 */
@@ -4343,7 +4453,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 40px;
+    gap: 28px;
     padding-bottom: 16px;
     width: 90%;
   }
@@ -4366,18 +4476,21 @@ main {
     justify-content: space-between;
     width: 100%;
     background: var(--gold-deep);
+    border: 1.5px solid rgba(255, 255, 255, 0.25);
     border-radius: 100px;
-    padding: 24px 14px 24px 22px;
+    padding: 20px 14px 20px 22px;
     box-sizing: border-box;
     text-decoration: none !important;
     color: #ffffff !important;
-    transition: background 0.25s ease, border-color 0.25s ease;
+    box-shadow: 0 10px 26px -6px rgba(200, 139, 0, 0.55);
     cursor: pointer;
   }
 
-  .menu-cta-btn:hover {
-    background: rgba(206, 162, 115, 0.18);
-    border-color: var(--gold-bright);
+  .menu-cta-btn:hover,
+  .menu-cta-btn:active {
+    background: #db9a06;
+    border-color: #ffffff;
+    transform: translateY(-2px);
   }
 
   .menu-cta-left {
@@ -4392,8 +4505,8 @@ main {
   }
 
   .menu-cta-left i {
-    font-size: 24px;
-    color: var(--gold-bright);
+    font-size: 22px;
+    color: #fff6dc;
   }
 
   .menu-cta-arrow {
@@ -4405,14 +4518,14 @@ main {
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    color: var(--pale);
+    color: #ffffff;
     font-size: 13px;
     transition: background 0.25s ease, transform 0.25s ease;
   }
 
   .menu-cta-btn:hover .menu-cta-arrow {
-    background: var(--gold-bright);
-    transform: translateX(2px);
+    background: #091c3a;
+    transform: translateX(3px);
   }
 
   /* 選單主要連結 */
@@ -4433,19 +4546,20 @@ main {
     color: #ffffff !important;
     text-decoration: none !important;
     padding: 12px 0;
-    background: transparent;
+    background: transparent !important;
     border: none;
     display: block;
     width: 100%;
     box-sizing: border-box;
-    transition: color 0.25s ease, transform 0.25s ease;
   }
 
   .site-head .menu .menu-links>a:hover,
   .site-head .menu .menu-links .has-sub>a:hover,
   .site-head .menu .menu-links>a.active,
   .site-head .menu .menu-links .has-sub>a.active {
-    color: var(--gold-bright) !important;
+    color: #ffcf5c !important;
+    background: transparent !important;
+    transform: translateX(6px);
   }
 
   /* 子選單 */
@@ -4461,12 +4575,13 @@ main {
     visibility: visible !important;
     box-shadow: none !important;
     border: none !important;
-    margin: 0 !important;
-    padding: 0 !important;
+    margin: 2px 0 6px !important;
+    padding: 0 0 0 12px !important;
+    border-left: 2px solid rgba(200, 139, 0, 0.4) !important;
     background: transparent !important;
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 4px;
     width: 100%;
   }
 
@@ -4479,20 +4594,24 @@ main {
     font-size: 18px;
     font-weight: 700;
     letter-spacing: 1.5px;
-    color: #cbd5e1 !important;
-    padding: 10px 0 !important;
+    color: #dbe4f0 !important;
+    background: transparent !important;
+    padding: 10px 14px !important;
     border: none !important;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
     display: block !important;
     box-sizing: border-box;
     text-decoration: none !important;
     width: 100%;
-    transition: color 0.2s ease, transform 0.2s ease;
+    transition: color 0.22s ease, background 0.22s ease, padding-left 0.22s ease;
   }
 
   .site-head .menu .submenu a:hover,
+  .site-head .menu .submenu a:active,
   .site-head .menu .submenu a.active {
-    color: #ffffff !important;
+    background: rgba(200, 139, 0, 0.22) !important;
+    color: #ffcf5c !important;
+    padding-left: 20px !important;
   }
 
 }
@@ -4521,6 +4640,11 @@ main {
 @media (max-width: 480px) {
   .wrap {
     padding: 0 16px;
+  }
+
+  .ph-title {
+    font-size: 22px;
+    letter-spacing: 1px;
   }
 
   .site-head .head-inner {
