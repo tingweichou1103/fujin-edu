@@ -932,20 +932,22 @@ main {
 }
 
 .co-ic {
-  width: 74px;
-  height: 74px;
-  margin: 0 auto 24px;
-  border-radius: 0;
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
   background: var(--pale);
+  color: var(--navy);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: all .2s ease;
+  font-size: 24px;
+  transition: all .25s ease;
 }
 
 .co-ic svg {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   stroke: var(--royal);
   fill: none;
   stroke-width: 1.6;
@@ -956,6 +958,7 @@ main {
 
 .co-col:hover .co-ic {
   background: var(--navy);
+  color: #fff;
   transform: translateY(-4px);
 }
 
