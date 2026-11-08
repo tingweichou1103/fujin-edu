@@ -1398,15 +1398,17 @@ main {
   .collage-img-sub {
     width: 52%;
     height: 230px;
-    left: 0;
+    left: auto;
+    right: 0;
     border-width: 4px;
   }
 
   .collage-badge {
     width: 70px;
     height: 70px;
-    bottom: 12px;
-    right: 6px;
+    bottom: 18px;
+    left: 10%;
+    right: auto;
   }
 
   .collage-badge .cb-cn {
