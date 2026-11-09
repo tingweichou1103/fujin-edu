@@ -3251,13 +3251,15 @@ main {
 }
 
 .contact-card-sub {
-  font-size: 14px;
-  color: var(--gray-500);
-  line-height: 1.75;
+  font-family: 'Noto Sans TC', sans-serif;
+  font-size: 16px;
+  color: var(--gray-600);
+  line-height: 1.85;
   margin: 0;
 }
 
 .contact-card-text {
+  font-family: 'Noto Sans TC', sans-serif;
   font-size: 16px;
   color: var(--gray-600);
   line-height: 1.85;
